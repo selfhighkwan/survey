@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>輔導組午間活動問卷</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Warm gradient background */
+        body {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 25%, #ffecd2 50%, #a8edea 75%, #fed6e3 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+        }
+        
+        body.dark {
+            background: linear-gradient(135deg, #2d1b3d 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Decorative floating elements */
+        .floating-decoration {
+            position: fixed;
+            opacity: 0.1;
+            animation: float 20s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+        
+        .floating-decoration:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .floating-decoration:nth-child(2) { left: 20%; animation-delay: -5s; }
+        .floating-decoration:nth-child(3) { left: 70%; animation-delay: -10s; }
+        .floating-decoration:nth-child(4) { left: 80%; animation-delay: -15s; }
+        
+        /* Enhanced container styling */
+        .main-container {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 24px;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(255, 255, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+        
+        .dark .main-container {
+            background: rgba(30, 30, 50, 0.85);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Warm card styling */
+        .warm-card {
+            background: linear-gradient(145deg, rgba(255, 240, 230, 0.9), rgba(255, 250, 240, 0.8));
+            border: 1px solid rgba(255, 200, 150, 0.3);
+            box-shadow: 
+                0 8px 32px rgba(255, 165, 0, 0.1),
+                0 4px 16px rgba(255, 200, 150, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .warm-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 12px 40px rgba(255, 165, 0, 0.15),
+                0 8px 20px rgba(255, 200, 150, 0.25);
+        }
+        
+        .dark .warm-card {
+            background: linear-gradient(145deg, rgba(60, 50, 80, 0.9), rgba(70, 60, 90, 0.8));
+            border: 1px solid rgba(150, 120, 200, 0.3);
+            box-shadow: 
+                0 8px 32px rgba(100, 80, 150, 0.2),
+                0 4px 16px rgba(150, 120, 200, 0.1);
+        }
+        
+        /* Enhanced title styling */
+        .page-title {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientText 8s ease infinite;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        @keyframes gradientText {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .image-ring {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            background: radial-gradient(circle at center, rgba(255, 200, 150, 0.1), transparent);
+            border-radius: 50%;
+        }
+        
+        .ring-image {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 4px solid transparent;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #fecfef, #ff9a9e);
+            box-shadow: 
+                0 10px 30px rgba(255, 154, 158, 0.6),
+                0 5px 15px rgba(255, 154, 158, 0.4),
+                0 0 0 2px rgba(255, 255, 255, 0.5);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            animation: dramaticFloat 2.5s ease-in-out infinite;
+        }
+        
+        .ring-image:hover {
+            transform: scale(1.6) rotate(25deg) translateZ(40px) rotateX(15deg) rotateY(10deg);
+            box-shadow: 
+                0 40px 80px rgba(255, 154, 158, 0.8),
+                0 20px 50px rgba(255, 154, 158, 0.6),
+                0 0 0 6px rgba(255, 255, 255, 0.6),
+                0 0 50px rgba(255, 154, 158, 0.5),
+                inset 0 4px 8px rgba(255, 255, 255, 0.4);
+            filter: brightness(1.3) saturate(1.4) drop-shadow(0 0 20px rgba(255, 154, 158, 0.7));
+            border: 4px solid rgba(255, 255, 255, 0.8);
+        }
+        
+        @keyframes dramaticFloat {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg) scale(1); 
+                filter: brightness(1) hue-rotate(0deg);
+                box-shadow: 
+                    0 10px 30px rgba(255, 154, 158, 0.6),
+                    0 5px 15px rgba(255, 154, 158, 0.4),
+                    0 0 0 2px rgba(255, 255, 255, 0.5);
+            }
+            25% { 
+                transform: translateY(-8px) rotate(5deg) scale(1.05); 
+                filter: brightness(1.15) hue-rotate(10deg);
+                box-shadow: 
+                    0 15px 40px rgba(255, 154, 158, 0.7),
+                    0 8px 20px rgba(255, 154, 158, 0.5),
+                    0 0 0 3px rgba(255, 255, 255, 0.6);
+            }
+            50% { 
+                transform: translateY(-12px) rotate(-3deg) scale(1.08); 
+                filter: brightness(1.2) hue-rotate(-5deg);
+                box-shadow: 
+                    0 20px 50px rgba(255, 154, 158, 0.8),
+                    0 10px 25px rgba(255, 154, 158, 0.6),
+                    0 0 0 4px rgba(255, 255, 255, 0.7);
+            }
+            75% { 
+                transform: translateY(-6px) rotate(3deg) scale(1.03); 
+                filter: brightness(1.1) hue-rotate(5deg);
+                box-shadow: 
+                    0 12px 35px rgba(255, 154, 158, 0.7),
+                    0 6px 18px rgba(255, 154, 158, 0.5),
+                    0 0 0 3px rgba(255, 255, 255, 0.6);
+            }
+        }
+        
+        .month-label {
+            position: absolute;
+            font-size: 14px;
+            font-weight: 600;
+            color: #e91e63;
+            text-align: center;
+            width: 40px;
+            height: 20px;
+            line-height: 20px;
+            pointer-events: none;
+            text-shadow: 0 2px 4px rgba(233, 30, 99, 0.3);
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+        
+        .modal {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Enhanced modal content */
+        .modal-content {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            -webkit-font-smoothing: subpixel-antialiased;
+            font-smooth: always;
+            text-rendering: geometricPrecision;
+            will-change: transform;
+            background: linear-gradient(145deg, rgba(255, 250, 245, 0.98), rgba(255, 240, 235, 0.95));
+            border: 2px solid rgba(255, 200, 150, 0.3);
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+        
+        .dark .modal-content {
+            background: linear-gradient(145deg, rgba(40, 35, 60, 0.98), rgba(50, 45, 70, 0.95));
+            border: 2px solid rgba(150, 120, 200, 0.3);
+        }
+        
+        .modal-title, .modal-description, .modal-date {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            -webkit-font-smoothing: subpixel-antialiased;
+            font-smooth: always;
+            text-rendering: geometricPrecision;
+        }
+        
+        .modal-title {
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 1.3;
+            color: #2d3748;
+        }
+        
+        .modal-description {
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 1.6;
+            letter-spacing: 0.02em;
+            color: #4a5568;
+        }
+        
+        .modal-date {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 1.4;
+            color: #e91e63;
+        }
+        
+        .dark .modal-title { color: #f7fafc; }
+        .dark .modal-description { color: #e2e8f0; }
+        .dark .modal-date { color: #f093fb; }
+        
+        /* Google Forms styling */
+        .form-container {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(250, 245, 255, 0.9));
+            border: 1px solid rgba(200, 150, 255, 0.2);
+        }
+        
+        .dark .form-container {
+            background: linear-gradient(145deg, rgba(50, 45, 70, 0.95), rgba(60, 55, 80, 0.9));
+            border: 1px solid rgba(150, 120, 200, 0.2);
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container-layout {
+                flex-direction: column;
+            }
+            .image-ring {
+                width: 250px;
+                height: 250px;
+            }
+            .ring-image {
+                width: 50px;
+                height: 50px;
+            }
+            .month-label {
+                font-size: 12px;
+            }
+            .main-container {
+                margin: 1rem;
+                border-radius: 16px;
+            }
+        }
+        
+        /* Sparkle animation */
+        .sparkle {
+            position: absolute;
+            background: radial-gradient(circle, #ffd700, transparent);
+            border-radius: 50%;
+            animation: sparkle 4s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-gray-900 min-h-screen">
+    <!-- Floating decorative elements -->
+    <div class="floating-decoration">
+        <div style="font-size: 2rem;">🌸</div>
+    </div>
+    <div class="floating-decoration">
+        <div style="font-size: 1.5rem;">✨</div>
+    </div>
+    <div class="floating-decoration">
+        <div style="font-size: 2.5rem;">🌙</div>
+    </div>
+    <div class="floating-decoration">
+        <div style="font-size: 1.8rem;">💫</div>
+    </div>
+
+    <div class="container mx-auto p-6 relative z-10">
+        <div class="main-container p-8 max-w-none mx-4">
+            <h1 class="page-title text-4xl font-bold text-center mb-12">
+                輔導組午間活動問卷
+            </h1>
+            
+            <div class="container-layout flex gap-8">
+                <!-- Left Frame - Image Ring -->
+                <div class="w-2/5 warm-card p-8 rounded-2xl">
+                    <h2 class="text-2xl font-bold mb-8 text-center bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-transparent">
+                        本年度午間活動巡禮
+                    </h2>
+                    <div class="image-ring" id="imageRing">
+                        <!-- Images and month labels will be positioned here by JavaScript -->
+                    </div>
+                    <p class="text-base text-gray-600 dark:text-gray-300 text-center mt-6 font-medium">
+                        ✨ 按圖放大 ✨
+                    </p>
+                </div>
+                
+                <!-- Right Frame - Google Form -->
+                <div class="flex-1 form-container p-8 rounded-2xl shadow-xl">
+                    <div class="border-l-4 border-gradient-to-b from-pink-400 to-purple-500 pl-6 mb-8">
+                        <h2 class="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
+                            問卷調查
+                        </h2>
+                        <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                            請參考左邊的活動相片圓環，然後填寫以下問卷 💝
+                        </p>
+                    </div>
+                    
+                    <!-- Google Forms Embed -->
+                    <div class="w-full rounded-xl overflow-hidden shadow-inner">
+                        <iframe 
+                            src="https://docs.google.com/forms/d/e/1FAIpQLScvtqIbMhCSZFyhAI6YOHuULIOEqnTEN6g8EarqHwU9XqPQ4g/viewform?embedded=true" 
+                            width="100%" 
+                            height="750" 
+                            frameborder="0" 
+                            marginheight="0" 
+                            marginwidth="0"
+                            class="rounded-xl"
+                            title="Survey Form">
+                            Loading…
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Enhanced Modal for enlarged images -->
+    <div id="imageModal" class="fixed inset-0 modal hidden items-center justify-center z-50">
+        <div class="modal-content rounded-3xl p-8 max-w-3xl w-full mx-6 relative transform transition-all duration-300">
+            <button id="closeModal" class="absolute top-6 right-6 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 text-3xl transition-colors duration-200 hover:rotate-90 transform">
+                ✕
+            </button>
+            <img id="modalImage" class="w-full h-72 object-cover rounded-2xl mb-6 shadow-lg" src="" alt="">
+            <h3 id="modalTitle" class="modal-title mb-3"></h3>
+            <p id="modalDate" class="modal-date mb-4"></p>
+            <p id="modalDescription" class="modal-description"></p>
+        </div>
+    </div>
+
+    <script>
+        // Dark mode detection
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        // Image data with relative paths
+        const imageData = [
+            { 
+                id: 1, 
+                title: "Time to Sleep 睡眠健康活動", 
+                description: "由駐校社工舉辦的Time to sleep身心自在空間。在導師帶領下同學在頌缽聲浴中得到休息的空間。",
+                imageUrl: "image/time-to-sleep.jpg",
+                month: "十二月",
+                date: "2024/12/11-2025/1/21"
+            },
+            { 
+                id: 2, 
+                title: "中三級超治癒蠟燭小組", 
+                description: "透過親手製作正念元素的蠟燭作品，協助青少年提升心理健康及促進個人成長。",
+                imageUrl: "image/candle-group.jpg",
+                month: "一月",
+                date: "2025/1/20-3/11"
+            },
+            { 
+                id: 3, 
+                title: "統測期間減壓活動攤位", 
+                description: "周一鬆一鬆的午間活動，在本校的玻璃房設置攤位，透過體驗不同身心自我關懷方法(包括聆聽大自然的音樂、享用不同口感/味道的小食、揀選自己喜歡的香味精油等)，讓學生學習如何有效減壓及如何尋求協助。",
+                imageUrl: "image/stress-relief.jpg",
+                month: "三月",
+                date: "2025/3/10"
+            },
+            { 
+                id: 4, 
+                title: "SLEEP WELL午間攤位", 
+                description: "是次活動跟大專院校合作，由一班就讀社會服務的學生設計遊戲及手工攤位去宣揚精神健康，內容包括：壓力沙包、流體熊創作、愛我請留言資訊版等等。",
+                imageUrl: "image/sleep-well-booth.jpg",
+                month: "三月",
+                date: "2025/3/17"
+            },
+            { 
+                id: 5, 
+                title: "「輸」中自有黃金屋--桌遊小組", 
+                description: "透過學習「接納失敗、檢視失敗及逆轉失敗」三步曲，期望學生能學習以積極正面的態度面對失敗，並在經驗中尋求改進的方法，加以實踐。",
+                imageUrl: "image/board-game-group.jpg",
+                month: "五月",
+                date: "2025/5/7, 14, 21"
+            },
+            { 
+                id: 6, 
+                title: "《心累學，心裡學 - 陪你巡迴校園》", 
+                description: "老師們帶領著中一中二級同學參與。本校期望透過校園內豐富的互動活動，提高學生對精神健康的認識，鼓勵積極面對所有情緒，促進同輩支持和共同心理健康援助，在校園中培養聆聽和分享的文化。",
+                imageUrl: "image/mental-health-tour.jpg",
+                month: "五月",
+                date: "2025/5/26"
+            },
+            { 
+                id: 7, 
+                title: "班際活動", 
+                description: "包括初中跳大繩及高中七人八足比賽",
+                imageUrl: "image/class-activity.jpg",
+                month: "",
+                date: ""
+            },
+            { 
+                id: 8, 
+                title: "咖啡拉花班", 
+                description: "分享製作成果與朋友及老師",
+                imageUrl: "image/coffee-latte-art.jpg",
+                month: "",
+                date: ""
+            },
+            { 
+                id: 9, 
+                title: "網絡安全意識小組", 
+                description: "通過認知網絡陷阱及討論應對方式，提昇同學對網絡安全的了解",
+                imageUrl: "image/network-security.jpg",
+                month: "",
+                date: ""
+            }
+        ];
+
+        // Create sparkle effect
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.width = sparkle.style.height = Math.random() * 6 + 3 + 'px';
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 4000);
+        }
+
+        // Create sparkles periodically
+        setInterval(createSparkle, 2000);
+
+        // Create image ring with month labels
+        function createImageRing() {
+            const ringContainer = document.getElementById('imageRing');
+            
+            imageData.forEach((item, index) => {
+                // Calculate position on circle for images
+                const angle = (index * 40) * (Math.PI / 180); // 40 degrees apart (360÷9=40)
+                const radius = 120;
+                const centerX = 150;
+                const centerY = 150;
+                
+                const x = centerX + radius * Math.cos(angle - Math.PI/2) - 30;
+                const y = centerY + radius * Math.sin(angle - Math.PI/2) - 30;
+                
+                // Create image element
+                const img = document.createElement('img');
+                img.src = item.imageUrl || `https://picsum.photos/200/200?random=${item.id}`;
+                img.alt = item.title;
+                img.className = 'ring-image object-cover';
+                img.style.left = `${x}px`;
+                img.style.top = `${y}px`;
+                
+                // Add click event
+                img.addEventListener('click', () => openModal(item));
+                
+                ringContainer.appendChild(img);
+                
+                // Create month label positioned outside the ring
+                const monthRadius = 160;
+                const monthX = centerX + monthRadius * Math.cos(angle - Math.PI/2) - 20;
+                const monthY = centerY + monthRadius * Math.sin(angle - Math.PI/2) - 10;
+                
+                const monthLabel = document.createElement('div');
+                monthLabel.textContent = item.month;
+                monthLabel.className = 'month-label';
+                monthLabel.style.left = `${monthX}px`;
+                monthLabel.style.top = `${monthY}px`;
+                
+                ringContainer.appendChild(monthLabel);
+            });
+            
+            console.log(`Created ${imageData.length} images in the ring with month labels`);
+        }
+
+        // Modal functionality
+        function openModal(item) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDate = document.getElementById('modalDate');
+            const modalDescription = document.getElementById('modalDescription');
+            
+            modalImage.src = item.imageUrl || `https://picsum.photos/600/400?random=${item.id}`;
+            modalTitle.textContent = item.title;
+            modalDate.textContent = item.date ? `📅 活動日期：${item.date}` : '';
+            modalDescription.textContent = item.description;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Event listeners
+        document.getElementById('closeModal').addEventListener('click', closeModal);
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Initialize
+        createImageRing();
+    </script>
+</body>
+</html>
