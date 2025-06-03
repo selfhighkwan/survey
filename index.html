@@ -319,17 +319,19 @@
                 box-shadow: 0 4px 16px rgba(200, 150, 255, 0.1);
             }
             
-            /* Properly centered ring */
+            /* Properly centered ring - much larger for mobile */
             .image-ring {
-                width: 160px;
-                height: 160px;
+                width: 85vw;
+                height: 85vw;
+                max-width: 320px;
+                max-height: 320px;
                 margin: 0.5rem auto;
                 position: relative;
             }
             
             .ring-image {
-                width: 32px;
-                height: 32px;
+                width: 45px;
+                height: 45px;
                 border: 2px solid transparent;
                 animation: mobileFloat 3s ease-in-out infinite;
             }
@@ -690,9 +692,18 @@
                 createRingInContainer(ringContainer, 120, 150, 150, 160, 30, 20, 10);
             }
             
-            // Mobile ring with proper centering
+            // Mobile ring with proper centering - larger scale
             if (mobileRingContainer) {
-                createRingInContainer(mobileRingContainer, 60, 80, 80, 90, 16, 12, 6);
+                // Dynamic sizing based on container
+                const containerSize = Math.min(window.innerWidth * 0.85, 320);
+                const radius = containerSize * 0.37; // ~37% of container size
+                const center = containerSize / 2;
+                const monthRadius = containerSize * 0.45;
+                const imageOffset = 22.5; // half of 45px image size
+                const monthOffsetX = 18;
+                const monthOffsetY = 8;
+                
+                createRingInContainer(mobileRingContainer, radius, center, center, monthRadius, imageOffset, monthOffsetX, monthOffsetY);
             }
             
             console.log(`Created ${imageData.length} images in the ring with month labels`);
