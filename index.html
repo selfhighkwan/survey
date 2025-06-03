@@ -308,11 +308,13 @@
                 margin: 0;
             }
             
-            /* Smaller, more compact ring */
+            /* Smaller, more compact ring - better centered */
             .image-ring {
-                width: 200px;
-                height: 200px;
+                width: 180px;
+                height: 180px;
                 margin: 0.5rem auto;
+                position: relative;
+                left: 0;
             }
             
             .ring-image {
@@ -358,23 +360,32 @@
                 margin-bottom: 1rem !important;
             }
             
-            /* Maximize form space */
+            /* Maximize form space - remove extra nesting */
             .form-container {
-                padding: 1rem !important;
+                padding: 0.75rem !important;
                 width: 100%;
                 margin: 0;
             }
             
             .border-l-4 {
-                padding-left: 1rem !important;
-                margin-bottom: 1rem !important;
+                padding-left: 0.75rem !important;
+                margin-bottom: 0.75rem !important;
             }
             
-            /* Much taller iframe for mobile */
+            /* Much taller iframe for mobile - remove wrapper spacing */
             .form-container iframe {
-                height: 85vh !important;
-                min-height: 650px;
+                height: 90vh !important;
+                min-height: 700px;
                 border-radius: 8px;
+                margin: 0;
+                padding: 0;
+            }
+            
+            /* Remove extra wrapper on mobile */
+            .form-container > div:last-child {
+                padding: 0 !important;
+                margin: 0 !important;
+                box-shadow: none !important;
             }
             
             /* Compact modal for mobile */
