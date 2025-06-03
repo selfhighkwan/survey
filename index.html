@@ -372,8 +372,8 @@
             
             /* Much taller iframe for mobile */
             .form-container iframe {
-                height: 80vh !important;
-                min-height: 600px;
+                height: 85vh !important;
+                min-height: 650px;
                 border-radius: 8px;
             }
             
@@ -518,7 +518,7 @@
             }
         });
 
-        // Image data with relative paths
+        // Image data with relative paths - updated with new activities in chronological order
         const imageData = [
             { 
                 id: 1, 
@@ -538,6 +538,14 @@
             },
             { 
                 id: 3, 
+                title: "義工服務", 
+                description: "同學在西九文化區協助分發食物給家庭和長者，並與社區人士共享盆菜宴，又扮演財神，增添節日氣氛，較早前於午間時間做好準備。",
+                imageUrl: "image/volunteer-service.jpg",
+                month: "一月",
+                date: "2025/1/24"
+            },
+            { 
+                id: 4, 
                 title: "統測期間減壓活動攤位", 
                 description: "周一鬆一鬆的午間活動，在本校的玻璃房設置攤位，透過體驗不同身心自我關懷方法(包括聆聽大自然的音樂、享用不同口感/味道的小食、揀選自己喜歡的香味精油等)，讓學生學習如何有效減壓及如何尋求協助。",
                 imageUrl: "image/stress-relief.jpg",
@@ -545,7 +553,7 @@
                 date: "2025/3/10"
             },
             { 
-                id: 4, 
+                id: 5, 
                 title: "SLEEP WELL午間攤位", 
                 description: "是次活動跟大專院校合作，由一班就讀社會服務的學生設計遊戲及手工攤位去宣揚精神健康，內容包括：壓力沙包、流體熊創作、愛我請留言資訊版等等。",
                 imageUrl: "image/sleep-well-booth.jpg",
@@ -553,7 +561,15 @@
                 date: "2025/3/17"
             },
             { 
-                id: 5, 
+                id: 6, 
+                title: "躲避盤小組", 
+                description: "同學參與教練的定期訓練，並與校外同學作賽，增進團隊精神和認識新朋友",
+                imageUrl: "image/sports-group.jpg",
+                month: "三月",
+                date: "2025/3月-5月"
+            },
+            { 
+                id: 7, 
                 title: "「輸」中自有黃金屋--桌遊小組", 
                 description: "透過學習「接納失敗、檢視失敗及逆轉失敗」三步曲，期望學生能學習以積極正面的態度面對失敗，並在經驗中尋求改進的方法，加以實踐。",
                 imageUrl: "image/board-game-group.jpg",
@@ -561,7 +577,15 @@
                 date: "2025/5/7, 14, 21"
             },
             { 
-                id: 6, 
+                id: 8, 
+                title: "社交達人小組", 
+                description: "透過各類型的遊戲，提升同學社交情意。同學們投入活動，也能在活動中認識新朋友。",
+                imageUrl: "image/peer-group.jpg",
+                month: "五月",
+                date: "2025/5/15"
+            },
+            { 
+                id: 9, 
                 title: "《心累學，心裡學 - 陪你巡迴校園》", 
                 description: "老師們帶領著中一中二級同學參與。本校期望透過校園內豐富的互動活動，提高學生對精神健康的認識，鼓勵積極面對所有情緒，促進同輩支持和共同心理健康援助，在校園中培養聆聽和分享的文化。",
                 imageUrl: "image/mental-health-tour.jpg",
@@ -569,7 +593,7 @@
                 date: "2025/5/26"
             },
             { 
-                id: 7, 
+                id: 10, 
                 title: "班際活動", 
                 description: "包括初中跳大繩及高中七人八足比賽",
                 imageUrl: "image/class-activity.jpg",
@@ -577,18 +601,10 @@
                 date: ""
             },
             { 
-                id: 8, 
+                id: 11, 
                 title: "咖啡拉花班", 
                 description: "分享製作成果與朋友及老師",
                 imageUrl: "image/coffee-latte-art.jpg",
-                month: "",
-                date: ""
-            },
-            { 
-                id: 9, 
-                title: "網絡安全意識小組", 
-                description: "通過認知網絡陷阱及討論應對方式，提昇同學對網絡安全的了解",
-                imageUrl: "image/network-security.jpg",
                 month: "",
                 date: ""
             }
@@ -617,7 +633,7 @@
             
             imageData.forEach((item, index) => {
                 // Calculate position on circle for images
-                const angle = (index * 40) * (Math.PI / 180); // 40 degrees apart (360÷9=40)
+                const angle = (index * 32.7) * (Math.PI / 180); // 32.7 degrees apart (360÷11=32.7)
                 const radius = 120;
                 const centerX = 150;
                 const centerY = 150;
